@@ -1,0 +1,23 @@
+.header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+}
+
+.header button {
+    padding: 20px;
+    border: none;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.header button:hover {
+    transform: translateY(5px);
+}
+
+.header button:active {
+    transform: translateY(8px);
+}
