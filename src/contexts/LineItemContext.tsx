@@ -4,6 +4,7 @@ import { lineItems as items } from '@/constants';
 import { roundNumber } from '@/utils';
 
 type LineItemContextType = {
+    loading: boolean;
     currentId: number;
     lineItems: LineItem[],
     total: number;
@@ -24,6 +25,7 @@ type LineItemProviderProps = {
 const LineItemProvider = ({ children }: LineItemProviderProps) => {
     const calculateFees = useRef((lineItems: LineItem[]) => {});
 
+    const [loading, setLoading] = useState<boolean>(false);
     const [lineItems, setLineItems] = useState<LineItem[]>(items);
     const [currentId, setCurrentId] = useState<number>(3);
     const [values, setValues] = useState({
@@ -32,6 +34,26 @@ const LineItemProvider = ({ children }: LineItemProviderProps) => {
         shipping: 0,
         total: 0,
     });
+
+    const fetchLineItems = async () => {
+        setLoading(true);
+        try {
+            const res = await fetch(`/api/line-items`);
+            const response = await res.json();
+
+            setLineItems(response.data);
+
+            setLoading(false);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    useEffect(() => {
+        fetchLineItems();
+
+    }, []);
+
 
     const removeLineItem = (lineItemId: number) => {
         setLineItems((prevState) => prevState.filter(
@@ -86,6 +108,7 @@ const LineItemProvider = ({ children }: LineItemProviderProps) => {
     return (
         <LineItemContext.Provider
             value={{
+                loading,
                 shipping,
                 tax,
                 total,

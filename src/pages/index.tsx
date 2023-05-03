@@ -1,15 +1,18 @@
-import { Container, Header, Products, Fees } from '@/components';
-import { HST, lineItems as items, SHIPPING, SUBTOTAL, TOTAL } from '@/constants';
+import { Container, Header, Products, Fees, Spinner } from '@/components';
 import useLineItems from '@/hooks/useLineItems';
 
 export default function Home() {
-
+    const { loading } = useLineItems();
     return (
         <>
             <Container>
                 <Header/>
-                <Products />
-                <Fees />
+                {loading ? <Spinner /> : (
+                    <>
+                        <Products />
+                        <Fees />
+                    </>
+                )}
             </Container>
         </>
     );

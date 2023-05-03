@@ -3,3 +3,4 @@ export * from './Header';
 export * from './Products';
 export * from './Product';
 export * from './Fees';
+export * from './Spinner';
