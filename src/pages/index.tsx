@@ -1,5 +1,5 @@
-import { Container, Header, Products } from '@/components';
-import { lineItems } from '@/constants';
+import { Container, Header, Products, Fees } from '@/components';
+import { HST, lineItems, SHIPPING, SUBTOTAL, TOTAL } from '@/constants';
 
 export default function Home() {
   return (
@@ -7,6 +7,7 @@ export default function Home() {
       <Container>
           <Header />
           <Products lineItems={lineItems} />
+          <Fees subTotal={SUBTOTAL} tax={HST} shipping={SHIPPING} total={TOTAL} />
       </Container>
     </>
   )

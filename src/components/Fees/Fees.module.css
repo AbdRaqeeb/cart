@@ -1,0 +1,36 @@
+.fees {
+    padding: 10px 40px;
+    grid-area: bottom;
+}
+
+.fees__detail {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 15px 0;
+}
+
+.total {
+    font-weight: 700;
+}
+
+.fees__detail:last-of-type {
+    margin: 10px 0;
+}
+
+.fees__detail input {
+    flex: 1 1 80%;
+    margin-right: 5px;
+    padding: 10px;
+}
+
+.fees__detail button {
+    flex: 1 1 5%;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
