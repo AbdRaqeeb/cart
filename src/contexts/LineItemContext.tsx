@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
 import { LineItem } from '@/types';
-import { roundNumber } from '@/utils';
+import { getRandomInt, roundNumber } from '@/utils';
 import { ESTIMATED_DELIVERY, lineItems as items } from '@/constants';
 
 type LineItemContextType = {
@@ -85,15 +85,10 @@ const LineItemProvider = ({ children }: LineItemProviderProps) => {
     };
 
     const generateLineItem = (id: number): LineItem => {
+        const item = items[getRandomInt(0, 2)];
         return {
+            ...item,
             id: id + 1,
-            title: "Grey Sofa",
-            price: 499.99,
-            quantity: 1,
-            image:
-                "https://www.cozey.ca/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0277%2F3057%2F5462%2Fproducts%2F2_Single_shot_DARK_GREY_OFF_OFF_SLOPE_17f0f115-11f8-4a78-b412-e9a2fea4748d.png%3Fv%3D1629310667&w=1920&q=75",
-            swatchColor: "#959392",
-            swatchTitle: "Grey",
             estimatedDeliveryDate: ESTIMATED_DELIVERY,
         }
     };
