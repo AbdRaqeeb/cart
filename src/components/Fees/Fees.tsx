@@ -2,15 +2,11 @@ import React from 'react';
 import styles from './Fees.module.css';
 import { BLUE } from '@/constants';
 import { roundNumber } from '@/utils';
+import useLineItems from '@/hooks/useLineItems';
 
-type FeesProp = {
-    subTotal: number;
-    tax: number;
-    shipping: string;
-    total: number;
-}
+const Fees = () => {
+    const { total, subTotal, tax, shipping } = useLineItems();
 
-const Fees = ({ shipping, tax, total, subTotal }: FeesProp) => {
     return (
         <div className={ styles.fees }>
             <div className={ styles.fees__detail }>
@@ -23,7 +19,7 @@ const Fees = ({ shipping, tax, total, subTotal }: FeesProp) => {
             </div>
             <div className={ styles.fees__detail }>
                 <span>Shipping</span>
-                <span>{shipping}</span>
+                <span>${shipping}</span>
             </div>
             <div style={ { color: BLUE } } className={ `${styles.total} ${styles.fees__detail}` }>
                 <span>Total</span>

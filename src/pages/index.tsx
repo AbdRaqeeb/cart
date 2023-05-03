@@ -1,14 +1,16 @@
 import { Container, Header, Products, Fees } from '@/components';
-import { HST, lineItems, SHIPPING, SUBTOTAL, TOTAL } from '@/constants';
+import { HST, lineItems as items, SHIPPING, SUBTOTAL, TOTAL } from '@/constants';
+import useLineItems from '@/hooks/useLineItems';
 
 export default function Home() {
-  return (
-    <>
-      <Container>
-          <Header />
-          <Products lineItems={lineItems} />
-          <Fees subTotal={SUBTOTAL} tax={HST} shipping={SHIPPING} total={TOTAL} />
-      </Container>
-    </>
-  )
+
+    return (
+        <>
+            <Container>
+                <Header/>
+                <Products />
+                <Fees />
+            </Container>
+        </>
+    );
 }

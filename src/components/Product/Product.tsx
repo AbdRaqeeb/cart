@@ -2,12 +2,14 @@ import React from 'react';
 import styles from './Product.module.css';
 import { LineItem } from '@/types';
 import { BLACK, BLUE, ESTIMATED_DELIVERY, LIGHT_GREY } from '@/constants';
+import useLineItems from '@/hooks/useLineItems';
 
 type ProductProp = {
     lineItem: LineItem;
 };
 
 const Product = ({ lineItem }: ProductProp) => {
+    const { removeLineItem } = useLineItems();
     return (
         <div className={ styles.product }>
             <div className={ styles.product__image }>
@@ -27,7 +29,7 @@ const Product = ({ lineItem }: ProductProp) => {
                 <span>${ lineItem.price }</span>
                 <div className={ styles.product__pricing__bottom }>
                     <span>Estimated Delivery Date: {ESTIMATED_DELIVERY}</span>
-                    <span className={ styles.remove }>Remove</span>
+                    <span onClick={() => removeLineItem(lineItem.id)} className={ styles.remove }>Remove</span>
                 </div>
             </div>
         </div>

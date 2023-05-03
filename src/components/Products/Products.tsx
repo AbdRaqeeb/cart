@@ -2,12 +2,10 @@ import React from 'react';
 import styles from './Products.module.css';
 import { LineItem } from '@/types';
 import { Product } from '@/components/Product';
+import useLineItems from '@/hooks/useLineItems';
 
-type ProductsProp = {
-    lineItems: LineItem[];
-}
-
-const Products = ({ lineItems }: ProductsProp) => {
+const Products = () => {
+    const { lineItems } = useLineItems();
     return (
         <div className={ styles.container }>
             <div className={ styles.products }>
