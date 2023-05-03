@@ -1,5 +1,5 @@
 import { Container, Header, Products, Fees, Spinner } from '@/components';
-import useLineItems from '@/hooks/useLineItems';
+import useLineItems from '@/hooks/useLineItem';
 
 export default function Home() {
     const { loading } = useLineItems();

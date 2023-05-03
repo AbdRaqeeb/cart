@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
 import { LineItem } from '@/types';
-import { lineItems as items } from '@/constants';
 import { roundNumber } from '@/utils';
+import { ESTIMATED_DELIVERY, lineItems as items } from '@/constants';
 
 type LineItemContextType = {
     postalCode: string;
@@ -19,7 +19,21 @@ type LineItemContextType = {
     fetchLineItems: (postalCode?: string) => void;
 }
 
-export const LineItemContext = createContext<LineItemContextType | null>(null);
+export const LineItemContext = createContext<LineItemContextType>({
+    postalCode: '',
+    loading: false,
+    currentId: 0,
+    lineItems: [],
+    total: 0,
+    subTotal: 0,
+    tax: 0,
+    shipping: 0,
+    removeLineItem: (lineItemId: number) => {},
+    addLineItem: (lineItemId: LineItem) => {},
+    generateLineItem: (id: number) => items[0],
+    setPostalCode: (postalCode: string) => {},
+    fetchLineItems: (postalCode?: string) => {},
+});
 
 type LineItemProviderProps = {
     children: React.ReactNode;
@@ -29,7 +43,7 @@ const LineItemProvider = ({ children }: LineItemProviderProps) => {
     const calculateFees = useRef((lineItems: LineItem[]) => {});
 
     const [loading, setLoading] = useState<boolean>(false);
-    const [lineItems, setLineItems] = useState<LineItem[]>(items);
+    const [lineItems, setLineItems] = useState<LineItem[]>([]);
     const [currentId, setCurrentId] = useState<number>(3);
     const [values, setValues] = useState({
         subTotal: 0,
@@ -79,7 +93,8 @@ const LineItemProvider = ({ children }: LineItemProviderProps) => {
             image:
                 "https://www.cozey.ca/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0277%2F3057%2F5462%2Fproducts%2F2_Single_shot_DARK_GREY_OFF_OFF_SLOPE_17f0f115-11f8-4a78-b412-e9a2fea4748d.png%3Fv%3D1629310667&w=1920&q=75",
             swatchColor: "#959392",
-            swatchTitle: "Grey"
+            swatchTitle: "Grey",
+            estimatedDeliveryDate: ESTIMATED_DELIVERY,
         }
     };
 

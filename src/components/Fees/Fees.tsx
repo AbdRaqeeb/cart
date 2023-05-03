@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import styles from './Fees.module.css';
 import { BLUE } from '@/constants';
 import { roundNumber } from '@/utils';
-import useLineItems from '@/hooks/useLineItems';
+import useLineItems from '@/hooks/useLineItem';
 
 const Fees = () => {
     const { total, subTotal, tax, shipping, fetchLineItems, postalCode, setPostalCode } = useLineItems();

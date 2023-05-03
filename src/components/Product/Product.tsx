@@ -2,14 +2,14 @@ import React from 'react';
 import styles from './Product.module.css';
 import { LineItem } from '@/types';
 import { BLACK, BLUE, LIGHT_GREY } from '@/constants';
-import useLineItems from '@/hooks/useLineItems';
+import useLineItem from '@/hooks/useLineItem';
 
 type ProductProp = {
     lineItem: LineItem;
 };
 
 const Product = ({ lineItem }: ProductProp) => {
-    const { removeLineItem } = useLineItems();
+    const { removeLineItem } = useLineItem();
     return (
         <div className={ styles.product }>
             <div className={ styles.product__image }>

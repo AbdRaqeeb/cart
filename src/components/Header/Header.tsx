@@ -1,7 +1,7 @@
 import React from 'react';
 import { BLUE } from '@/constants';
 import styles from './Header.module.css';
-import useLineItems from '@/hooks/useLineItems';
+import useLineItems from '@/hooks/useLineItem';
 
 const Header = () => {
     const { addLineItem, generateLineItem, currentId } = useLineItems();
