@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Product.module.css';
 import { LineItem } from '@/types';
-import { BLACK, BLUE, ESTIMATED_DELIVERY, LIGHT_GREY } from '@/constants';
+import { BLACK, BLUE, LIGHT_GREY } from '@/constants';
 import useLineItems from '@/hooks/useLineItems';
 
 type ProductProp = {
@@ -28,7 +28,7 @@ const Product = ({ lineItem }: ProductProp) => {
             <div style={ { color: BLACK } } className={ styles.product__pricing }>
                 <span>${ lineItem.price }</span>
                 <div className={ styles.product__pricing__bottom }>
-                    <span>Estimated Delivery Date: {ESTIMATED_DELIVERY}</span>
+                    <span>Estimated Delivery Date: {lineItem.estimatedDeliveryDate}</span>
                     <span onClick={() => removeLineItem(lineItem.id)} className={ styles.remove }>Remove</span>
                 </div>
             </div>

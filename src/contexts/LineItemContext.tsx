@@ -4,6 +4,7 @@ import { lineItems as items } from '@/constants';
 import { roundNumber } from '@/utils';
 
 type LineItemContextType = {
+    postalCode: string;
     loading: boolean;
     currentId: number;
     lineItems: LineItem[],
@@ -14,6 +15,8 @@ type LineItemContextType = {
     removeLineItem: (lineItemId: number) => void;
     addLineItem: (lineItemId: LineItem) => void;
     generateLineItem: (id: number) => LineItem;
+    setPostalCode: (postalCode: string) => void;
+    fetchLineItems: (postalCode?: string) => void;
 }
 
 export const LineItemContext = createContext<LineItemContextType | null>(null);
@@ -34,11 +37,12 @@ const LineItemProvider = ({ children }: LineItemProviderProps) => {
         shipping: 0,
         total: 0,
     });
+    const [postalCode, setPostalCode] = useState<string>('');
 
-    const fetchLineItems = async () => {
+    const fetchLineItems = async (postalCode?: string) => {
         setLoading(true);
         try {
-            const res = await fetch(`/api/line-items`);
+            const res = await fetch(`/api/line-items?postalCode=${postalCode}`);
             const response = await res.json();
 
             setLineItems(response.data);
@@ -108,6 +112,7 @@ const LineItemProvider = ({ children }: LineItemProviderProps) => {
     return (
         <LineItemContext.Provider
             value={{
+                postalCode,
                 loading,
                 shipping,
                 tax,
@@ -118,6 +123,8 @@ const LineItemProvider = ({ children }: LineItemProviderProps) => {
                 removeLineItem,
                 addLineItem,
                 generateLineItem,
+                setPostalCode,
+                fetchLineItems,
             }}
         >
             {children}
